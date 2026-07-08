@@ -1,0 +1,1019 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="{{project.meta.ogDescription}}">
+      <meta name="theme-color" content="#ffffff">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="robots" content="{{project.meta.robotsMeta}}">
+      
+      <title>{{project.seoTitle}}</title>
+      <!-- SEO Description -->
+      <meta name="description" content="{{project.seoDescription}}">
+
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
+       <link href="{{fontLink}}" rel="stylesheet">
+       <link href="{{secondaryFontLink}}" rel="stylesheet">
+      
+      <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+      <!-- Performance optimization: Preload critical resources -->
+      <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+      
+      <!-- Header Scripts -->
+      <script id="header-scripts">
+        // This script tag will be replaced with actual scripts.head content
+        if (window.scripts && window.scripts.head) {
+          document.getElementById('header-scripts').outerHTML = window.scripts.head;
+        }
+      </script>
+
+      <!-- Preconnect -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+      <!-- Font stylesheet -->
+
+      <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
+
+      <!-- Core CSS -->
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                primary: {
+                  DEFAULT: '{{settings.colors.primary}}',
+                  50: '#f8f8f8',
+                  100: '#e8e8e8', 
+                  200: '#d3d3d3',
+                  300: '#a3a3a3',
+                  400: '#737373',
+                  500: '#525252',
+                  600: '#404040',
+                  700: '#262626',
+                  800: '#171717',
+                  900: '#0a0a0a',
+                  950: '#030303',
+                },
+                secondary: {
+                  DEFAULT: '{{settings.colors.secondary}}',
+                  50: '#f8f8f8',
+                  100: '#e8e8e8',
+                  200: '#d3d3d3', 
+                  300: '#a3a3a3',
+                  400: '#737373',
+                  500: '#525252',
+                  600: '#404040',
+                  700: '#262626',
+                  800: '#171717',
+                  900: '#0a0a0a',
+                  950: '#030303',
+                },
+                accent: {
+                  DEFAULT: '{{settings.colors.accent}}',
+                  50: '#f8f8f8',
+                  100: '#e8e8e8',
+                  200: '#d3d3d3',
+                  300: '#a3a3a3', 
+                  400: '#737373',
+                  500: '#525252',
+                  600: '#404040',
+                  700: '#262626',
+                  800: '#171717',
+                  900: '#0a0a0a',
+                  950: '#030303',
+                },
+              },
+              fontFamily: {
+                sans: ['{{settings.fonts.primary}}', 'Roboto', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                heading: ['{{settings.fonts.secondary}}', 'system-ui', 'sans-serif'],
+                body: ['{{settings.fonts.secondary}}', 'system-ui', 'sans-serif'],
+              },
+              spacing: {
+                '18': '4.5rem',
+                '22': '5.5rem',
+                '30': '7.5rem',
+              },
+              maxWidth: {
+                '8xl': '88rem',
+                '9xl': '96rem',
+              },
+              animation: {
+                'fade-in': 'fadeIn 0.5s ease-in',
+                'fade-out': 'fadeOut 0.5s ease-out',
+                'slide-up': 'slideUp 0.5s ease-out',
+                'slide-down': 'slideDown 0.5s ease-out',
+                'slide-left': 'slideLeft 0.5s ease-out',
+                'slide-right': 'slideRight 0.5s ease-out',
+                'scale-in': 'scaleIn 0.5s ease-out',
+                'scale-out': 'scaleOut 0.5s ease-out',
+                'spin-slow': 'spin 3s linear infinite',
+                'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'bounce-slow': 'bounce 3s infinite',
+                'float': 'float 3s ease-in-out infinite',
+              },
+              keyframes: {
+                fadeIn: {
+                  '0%': { opacity: '0' },
+                  '100%': { opacity: '1' },
+                },
+                fadeOut: {
+                  '0%': { opacity: '1' },
+                  '100%': { opacity: '0' },
+                },
+                slideUp: {
+                  '0%': { transform: 'translateY(20px)', opacity: '0' },
+                  '100%': { transform: 'translateY(0)', opacity: '1' },
+                },
+                slideDown: {
+                  '0%': { transform: 'translateY(-20px)', opacity: '0' },
+                  '100%': { transform: 'translateY(0)', opacity: '1' },
+                },
+                slideLeft: {
+                  '0%': { transform: 'translateX(20px)', opacity: '0' },
+                  '100%': { transform: 'translateX(0)', opacity: '1' },
+                },
+                slideRight: {
+                  '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                  '100%': { transform: 'translateX(0)', opacity: '1' },
+                },
+                scaleIn: {
+                  '0%': { transform: 'scale(0.9)', opacity: '0' },
+                  '100%': { transform: 'scale(1)', opacity: '1' },
+                },
+                scaleOut: {
+                  '0%': { transform: 'scale(1.1)', opacity: '0' },
+                  '100%': { transform: 'scale(1)', opacity: '1' },
+                },
+                float: {
+                  '0%, 100%': { transform: 'translateY(0)' },
+                  '50%': { transform: 'translateY(-10px)' },
+                },
+              },
+              aspectRatio: {
+                'portrait': '3/4',
+                'landscape': '4/3',
+                'ultrawide': '21/9',
+              },
+            },
+          },
+          variants: {
+            extend: {
+              opacity: ['disabled'],
+              cursor: ['disabled'],
+              backgroundColor: ['active', 'disabled'],
+              textColor: ['active', 'disabled'],
+            },
+          },
+        }
+      });
+      </script>
+
+      <!-- Utilities and Components -->
+      <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js"></script>
+      <script defer src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.45.1/apexcharts.min.js"></script>
+      
+      <!-- Optimized Font Loading -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      
+      <!-- Icons -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+      <!-- Dynamic Meta Tags -->
+      <meta name="description" content="{{project.meta.ogDescription}}">
+      <meta name="keywords" content="{{project.meta.keywords}}">
+      <meta name="robots" content="{{project.meta.robotsMeta}}">
+      <meta name="google-site-verification" content="{{project.meta.googleVerification}}">
+      <meta name="baidu-verification" content="{{project.meta.baiduVerification}}">
+      <meta name="yandex-verification" content="{{project.meta.yandexVerification}}">
+      <meta name="bing-verification" content="{{project.meta.bingVerification}}">
+      <meta property="og:title" content="{{project.meta.ogTitle}}">
+      <meta property="og:description" content="{{project.meta.ogDescription}}">
+      <meta property="og:image" content="{{project.meta.ogImage}}">
+      <meta property="og:type" content="website">
+      <meta property="og:locale" content="en_US">
+      <meta property="og:site_name" content="{{project.name}}">
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content="{{project.meta.ogTitle}}">
+      <meta name="twitter:description" content="{{project.meta.ogDescription}}">
+      <meta name="twitter:image" content="{{project.meta.ogImage}}">
+
+      
+      <link rel="icon" type="image/x-icon" href="{{settings.favicon}}">
+      
+      <style>
+        h1, h2, h3, h4, h5, h6 {
+          font-family: {{settings.fonts.primary}}, system-ui, sans-serif;
+        }
+        body {
+          font-family: {{settings.fonts.secondary}}, system-ui, sans-serif;
+        }
+      </style>
+   </head>
+   <body class="antialiased text-gray-800 min-h-screen flex flex-col">
+      <!-- Skip to main content link for accessibility -->
+      <a href="#main-content" 
+         class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-white focus:text-black">
+         Skip to main content
+      </a>
+
+      <!-- Header -->
+      <header class="relative z-50 bg-white dark:bg-gray-900">
+        <!-- Header content goes here -->
+      </header>
+
+      <!-- Main content area -->
+      <main id="main-content" class="flex-1 relative h-full">
+        <!-- Content will be injected here -->
+      </main>
+
+      <!-- {bodyScripts} -->
+
+   </body>
+</html><element id="cd3cabee-87e6-491f-9629-cd6d05b875b4" data-section-id="cd3cabee-87e6-491f-9629-cd6d05b875b4">
+
+
+<div id="root">
+  <header id="header" class="fixed w-full z-50">
+    <nav class="bg-neutral-900 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20">
+          <div class="flex items-center">
+            <div class="text-2xl font-bold text-[#27AE60]">Nutrinix</div>
+          </div>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex items-center space-x-8">
+              <a href="/" class="hover:text-[#27AE60] transition-colors duration-200">Home</a>
+              <a href="/nutritionists" class="hover:text-[#27AE60] transition-colors duration-200">Our Doctors</a>
+              <a href="/consultation" class="hover:text-[#27AE60] transition-colors duration-200">Book Consultation</a>
+              <a href="/testimonials" class="hover:text-[#27AE60] transition-colors duration-200">Testimonials</a>
+              <a href="/faq" class="hover:text-[#27AE60] transition-colors duration-200">FAQs</a>
+              <a href="/contact" class="hover:text-[#27AE60] transition-colors duration-200">Contact</a>
+              <a href="/login" class="hover:text-[#27AE60] transition-colors duration-200">Login</a>
+            <button class="bg-[#F1C40F] text-neutral-900 px-6 py-2 rounded-full hover:bg-[#F1C40F]/90 transition-all duration-200">
+              Book Consultation
+            </button>
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="md:hidden flex items-center">
+            <button id="mobile-menu-button" class="text-white hover:text-[#27AE60]">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-neutral-800">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="/" class="block px-3 py-2 hover:bg-neutral-700 rounded-md">Home</a>
+            <a href="/nutritionists" class="block px-3 py-2 hover:bg-neutral-700 rounded-md">Our Doctors</a>
+            <a href="/consultation" class="block px-3 py-2 hover:bg-neutral-700 rounded-md">Book Consultation</a>
+            <a href="/testimonials" class="block px-3 py-2 hover:bg-neutral-700 rounded-md">Testimonials</a>
+            <a href="/faq" class="block px-3 py-2 hover:bg-neutral-700 rounded-md">FAQs</a>
+            <a href="/contact" class="block px-3 py-2 hover:bg-neutral-700 rounded-md">Contact</a>
+            <a href="/login" class="block px-3 py-2 hover:bg-neutral-700 rounded-md">Login</a>
+          <button class="w-full text-center bg-[#F1C40F] text-neutral-900 px-6 py-2 rounded-full hover:bg-[#F1C40F]/90 mt-4">
+            Book Consultation
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <script>
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.classList.add('hidden');
+        }
+      });
+
+      // Add scroll effect to header
+      window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        if (window.scrollY > 0) {
+          header.classList.add('shadow-lg');
+        } else {
+          header.classList.remove('shadow-lg');
+        }
+      });
+    </script>
+  </header>
+</div>
+</element><element id="c40707d4-8087-42a4-b390-06a1ed75a237" data-section-id="c40707d4-8087-42a4-b390-06a1ed75a237">
+
+
+<div id="root">
+  <section id="hero" class="min-h-[70vh] bg-neutral-900 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-[#2C3E50]/90 to-[#27AE60]/30"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex items-center">
+      <div class="grid md:grid-cols-2 gap-8 items-center pt-24 pb-12">
+        <div class="animate__animated animate__fadeInLeft">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Personalized Nutrition, <br/>
+            <span class="text-[#27AE60]">Anytime, Anywhere.</span>
+          </h1>
+          <p class="text-gray-300 text-lg md:text-xl mb-8 max-w-lg">
+            Connect with certified nutritionists for expert guidance tailored to your health goals. Virtual consultations made simple and effective.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button class="bg-[#F1C40F] text-neutral-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#F1C40F]/90 transition-all duration-300 animate__animated animate__pulse animate__infinite">
+              Book Your Consultation Now
+            </button>
+            <button class="border-2 border-[#27AE60] text-[#27AE60] px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#27AE60] hover:text-white transition-all duration-300">
+              Learn More
+            </button>
+          </div>
+        </div>
+        
+        <div class="hidden md:block animate__animated animate__fadeInRight">
+          <div class="relative">
+            <div class="absolute inset-0 bg-[#27AE60]/20 rounded-2xl backdrop-blur-sm"></div>
+            <div class="bg-neutral-800 p-8 rounded-2xl border border-neutral-700">
+              <div class="flex items-center gap-4 mb-6">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+              </div>
+              <div class="aspect-video bg-neutral-700 rounded-lg flex items-center justify-center">
+                <div class="text-center">
+                  <div class="text-4xl text-[#27AE60] mb-2">
+                    <i class="fas fa-video"></i>
+                  </div>
+                  <p class="text-gray-400">Virtual Consultation Preview</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-neutral-900 to-transparent"></div>
+  </section>
+</div>
+</element><element id="805cd895-bf01-4a12-aca5-3be5a8eb9d99" data-section-id="805cd895-bf01-4a12-aca5-3be5a8eb9d99">
+
+
+<div id="root">
+  <section id="features" class="py-20 bg-neutral-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 animate__animated animate__fadeIn">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#2C3E50] mb-4">Why Choose Nutrinix?</h2>
+        <p class="text-neutral-600 max-w-2xl mx-auto">Experience personalized nutrition consulting with our comprehensive platform features</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 animate__animated animate__fadeInUp">
+          <div class="w-14 h-14 bg-[#27AE60]/10 rounded-lg flex items-center justify-center mb-6">
+            <i class="fas fa-dollar-sign text-2xl text-[#27AE60]"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-[#2C3E50] mb-3">Affordable & Accessible</h3>
+          <p class="text-neutral-600">Budget-friendly consultations with integrated payment gateway and instant meeting links.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+          <div class="w-14 h-14 bg-[#27AE60]/10 rounded-lg flex items-center justify-center mb-6">
+            <i class="fas fa-certificate text-2xl text-[#27AE60]"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-[#2C3E50] mb-3">Certified Experts</h3>
+          <p class="text-neutral-600">Connect with verified nutritionists who are experts in their specialized fields.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+          <div class="w-14 h-14 bg-[#27AE60]/10 rounded-lg flex items-center justify-center mb-6">
+            <i class="fas fa-language text-2xl text-[#27AE60]"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-[#2C3E50] mb-3">Multi-Language Support</h3>
+          <p class="text-neutral-600">Choose your preferred language for seamless communication with experts.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 animate__animated animate__fadeInUp">
+          <div class="w-14 h-14 bg-[#27AE60]/10 rounded-lg flex items-center justify-center mb-6">
+            <i class="fas fa-utensils text-2xl text-[#27AE60]"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-[#2C3E50] mb-3">Personalized Meal Plans</h3>
+          <p class="text-neutral-600">Get customized diet plans tailored to your specific health goals and preferences.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+          <div class="w-14 h-14 bg-[#27AE60]/10 rounded-lg flex items-center justify-center mb-6">
+            <i class="fas fa-calendar-alt text-2xl text-[#27AE60]"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-[#2C3E50] mb-3">Flexible Appointments</h3>
+          <p class="text-neutral-600">Book consultations at your convenience with real-time availability updates.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+          <div class="w-14 h-14 bg-[#27AE60]/10 rounded-lg flex items-center justify-center mb-6">
+            <i class="fas fa-lock text-2xl text-[#27AE60]"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-[#2C3E50] mb-3">Secure Platform</h3>
+          <p class="text-neutral-600">Protected consultations with encrypted communication and secure payment processing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</element><element id="b20779fd-e413-46ed-a69c-cb9fa4e14e95" data-section-id="b20779fd-e413-46ed-a69c-cb9fa4e14e95">
+
+
+<div id="root">
+  <section id="nutritionists" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 animate__animated animate__fadeIn">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#2C3E50] mb-4">Our Featured Nutritionists</h2>
+        <p class="text-neutral-600 max-w-2xl mx-auto">Connect with our certified experts for personalized nutrition guidance</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Nutritionist 1 -->
+        <div class="bg-neutral-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 animate__animated animate__fadeInUp">
+          <div class="bg-neutral-200 h-64 flex items-center justify-center">
+            <div class="w-24 h-24 rounded-full bg-[#27AE60] flex items-center justify-center">
+              <span class="text-3xl text-white">DR</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-semibold text-[#2C3E50]">Dr. Rachel Green</h3>
+              <span class="bg-[#27AE60]/10 text-[#27AE60] px-3 py-1 rounded-full text-sm">Available</span>
+            </div>
+            <p class="text-neutral-600 mb-4">PhD in Clinical Nutrition</p>
+            <div class="flex items-center gap-2 mb-4">
+              <i class="fas fa-star text-[#F1C40F]"></i>
+              <span class="text-neutral-600">4.9 (120+ reviews)</span>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-neutral-200 px-3 py-1 rounded-full text-sm">Weight Management</span>
+              <span class="bg-neutral-200 px-3 py-1 rounded-full text-sm">Sports Nutrition</span>
+              <span class="bg-neutral-200 px-3 py-1 rounded-full text-sm">Diabetes</span>
+            </div>
+            <button class="w-full bg-[#2C3E50] text-white py-3 rounded-lg hover:bg-[#2C3E50]/90 transition-colors">
+              Book Consultation
+            </button>
+          </div>
+        </div>
+
+        <!-- Nutritionist 2 -->
+        <div class="bg-neutral-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+          <div class="bg-neutral-200 h-64 flex items-center justify-center">
+            <div class="w-24 h-24 rounded-full bg-[#27AE60] flex items-center justify-center">
+              <span class="text-3xl text-white">JS</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-semibold text-[#2C3E50]">Dr. John Smith</h3>
+              <span class="bg-[#27AE60]/10 text-[#27AE60] px-3 py-1 rounded-full text-sm">Available</span>
+            </div>
+            <p class="text-neutral-600 mb-4">MSc in Dietetics</p>
+            <div class="flex items-center gap-2 mb-4">
+              <i class="fas fa-star text-[#F1C40F]"></i>
+              <span class="text-neutral-600">4.8 (95+ reviews)</span>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-neutral-200 px-3 py-1 rounded-full text-sm">Clinical Nutrition</span>
+              <span class="bg-neutral-200 px-3 py-1 rounded-full text-sm">Pediatric Nutrition</span>
+              <span class="bg-neutral-200 px-3 py-1 rounded-full text-sm">Allergies</span>
+            </div>
+            <button class="w-full bg-[#2C3E50] text-white py-3 rounded-lg hover:bg-[#2C3E50]/90 transition-colors">
+              Book Consultation
+            </button>
+          </div>
+        </div>
+
+        <!-- Nutritionist 3 -->
+        <div class="bg-neutral-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+          <div class="bg-neutral-200 h-64 flex items-center justify-center">
+            <div class="w-24 h-24 rounded-full bg-[#27AE60] flex items-center justify-center">
+              <span class="text-3xl text-white">SP</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-semibold text-[#2C3E50]">Sarah Parker</h3>
+              <span class="bg-neutral-300 text-neutral-600 px-3 py-1 rounded-full text-sm">Busy</span>
+            </div>
+            <p class="text-neutral-600 mb-4">Sports Nutrition Specialist</p>
+            <div class="flex items-center gap-2 mb-4">
+              <i class="fas fa-star text-[#F1C40F]"></i>
+              <span class="text-neutral-600">4.9 (150+ reviews)</span>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-neutral-200 px-3 py-1 rounded-full text-sm">Athletic Performance</span>
+              <span class="bg-neutral-200 px-3 py-1 rounded-full text-sm">Meal Planning</span>
+              <span class="bg-neutral-200 px-3 py-1 rounded-full text-sm">Recovery</span>
+            </div>
+            <button class="w-full bg-neutral-300 text-neutral-600 py-3 rounded-lg cursor-not-allowed">
+              Currently Unavailable
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <button class="bg-[#F1C40F] text-neutral-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#F1C40F]/90 transition-all duration-300 animate__animated animate__pulse animate__infinite">
+          View All Nutritionists
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+</element><element id="db5d1659-a994-4808-a196-4fa352135225" data-section-id="db5d1659-a994-4808-a196-4fa352135225">
+
+
+<div id="root">
+  <section id="consultation" class="py-20 bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 animate__animated animate__fadeIn">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Book Your Consultation</h2>
+        <p class="text-neutral-400 max-w-2xl mx-auto">Three simple steps to start your journey towards better nutrition</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Step 1 -->
+        <div class="bg-neutral-800 rounded-xl p-8 relative animate__animated animate__fadeInUp">
+          <div class="absolute -top-6 left-8 w-12 h-12 bg-[#F1C40F] rounded-full flex items-center justify-center text-xl font-bold text-neutral-900">1</div>
+          <div class="mt-6">
+            <h3 class="text-xl font-semibold text-white mb-4">Choose Your Nutritionist</h3>
+            <p class="text-neutral-400 mb-6">Browse through our verified experts and select based on your specific needs.</p>
+            <div class="space-y-4">
+              <div class="flex items-center gap-3 text-neutral-300">
+                <i class="fas fa-check-circle text-[#27AE60]"></i>
+                <span>View detailed profiles</span>
+              </div>
+              <div class="flex items-center gap-3 text-neutral-300">
+                <i class="fas fa-check-circle text-[#27AE60]"></i>
+                <span>Read client reviews</span>
+              </div>
+              <div class="flex items-center gap-3 text-neutral-300">
+                <i class="fas fa-check-circle text-[#27AE60]"></i>
+                <span>Check availability</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-neutral-800 rounded-xl p-8 relative animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+          <div class="absolute -top-6 left-8 w-12 h-12 bg-[#F1C40F] rounded-full flex items-center justify-center text-xl font-bold text-neutral-900">2</div>
+          <div class="mt-6">
+            <h3 class="text-xl font-semibold text-white mb-4">Schedule & Pay</h3>
+            <p class="text-neutral-400 mb-6">Select your preferred time slot and complete secure payment.</p>
+            <div class="space-y-4">
+              <div class="flex items-center gap-3 text-neutral-300">
+                <i class="fas fa-check-circle text-[#27AE60]"></i>
+                <span>Flexible timing options</span>
+              </div>
+              <div class="flex items-center gap-3 text-neutral-300">
+                <i class="fas fa-check-circle text-[#27AE60]"></i>
+                <span>Secure payment gateway</span>
+              </div>
+              <div class="flex items-center gap-3 text-neutral-300">
+                <i class="fas fa-check-circle text-[#27AE60]"></i>
+                <span>Instant confirmation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-neutral-800 rounded-xl p-8 relative animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+          <div class="absolute -top-6 left-8 w-12 h-12 bg-[#F1C40F] rounded-full flex items-center justify-center text-xl font-bold text-neutral-900">3</div>
+          <div class="mt-6">
+            <h3 class="text-xl font-semibold text-white mb-4">Start Consultation</h3>
+            <p class="text-neutral-400 mb-6">Join your virtual consultation and begin your wellness journey.</p>
+            <div class="space-y-4">
+              <div class="flex items-center gap-3 text-neutral-300">
+                <i class="fas fa-check-circle text-[#27AE60]"></i>
+                <span>Auto-generated meeting link</span>
+              </div>
+              <div class="flex items-center gap-3 text-neutral-300">
+                <i class="fas fa-check-circle text-[#27AE60]"></i>
+                <span>Email reminders</span>
+              </div>
+              <div class="flex items-center gap-3 text-neutral-300">
+                <i class="fas fa-check-circle text-[#27AE60]"></i>
+                <span>Downloadable resources</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-16">
+        <button class="bg-[#F1C40F] text-neutral-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#F1C40F]/90 transition-all duration-300 animate__animated animate__pulse animate__infinite">
+          Start Your Consultation Journey
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+</element><element id="d4404473-3e8a-4e5a-a3c2-b0f60b7617bf" data-section-id="d4404473-3e8a-4e5a-a3c2-b0f60b7617bf">
+
+
+<div id="root">
+  <section id="testimonials" class="py-20 bg-neutral-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 animate__animated animate__fadeIn">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#2C3E50] mb-4">What Our Clients Say</h2>
+        <p class="text-neutral-600 max-w-2xl mx-auto">Real stories from people who transformed their lives with Nutrinix</p>
+      </div>
+
+      <div class="testimonial-slider relative">
+        <div class="swiper-container">
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Testimonial 1 -->
+            <div class="bg-white p-8 rounded-xl shadow-lg animate__animated animate__fadeInUp">
+              <div class="flex justify-between items-start mb-6">
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 bg-[#27AE60] rounded-full flex items-center justify-center text-white font-bold">
+                    AM
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-[#2C3E50]">Alice Mitchell</h4>
+                    <p class="text-sm text-neutral-500">Weight Management Client</p>
+                  </div>
+                </div>
+                <div class="flex gap-1">
+                  <i class="fas fa-star text-[#F1C40F]"></i>
+                  <i class="fas fa-star text-[#F1C40F]"></i>
+                  <i class="fas fa-star text-[#F1C40F]"></i>
+                  <i class="fas fa-star text-[#F1C40F]"></i>
+                  <i class="fas fa-star text-[#F1C40F]"></i>
+                </div>
+              </div>
+              <blockquote class="text-neutral-600 mb-4">
+                "The personalized meal plans and regular consultations helped me achieve my weight goals. My nutritionist was incredibly supportive throughout the journey."
+              </blockquote>
+              <p class="text-[#27AE60]">Lost 20kg in 6 months</p>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="bg-white p-8 rounded-xl shadow-lg animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+              <div class="flex justify-between items-start mb-6">
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 bg-[#27AE60] rounded-full flex items-center justify-center text-white font-bold">
+                    RK
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-[#2C3E50]">Robert Kim</h4>
+                    <p class="text-sm text-neutral-500">Sports Nutrition Client</p>
+                  </div>
+                </div>
+                <div class="flex gap-1">
+                  <i class="fas fa-star text-[#F1C40F]"></i>
+                  <i class="fas fa-star text-[#F1C40F]"></i>
+                  <i class="fas fa-star text-[#F1C40F]"></i>
+                  <i class="fas fa-star text-[#F1C40F]"></i>
+                  <i class="fas fa-star text-[#F1C40F]"></i>
+                </div>
+              </div>
+              <blockquote class="text-neutral-600 mb-4">
+                "The expertise and guidance I received transformed my athletic performance. The convenience of virtual consultations fits perfectly with my training schedule."
+              </blockquote>
+              <p class="text-[#27AE60]">Improved marathon time by 15%</p>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="bg-white p-8 rounded-xl shadow-lg animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+              <div class="flex justify-between items-start mb-6">
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 bg-[#27AE60] rounded-full flex items-center justify-center text-white font-bold">
+                    SP
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-[#2C3E50]">Sarah Peters</h4>
+                    <p class="text-sm text-neutral-500">Diabetes Management</p>
+                  </div>
+                </div>
+                <div class="flex gap-1">
+                  <i class="fas fa-star text-[#F1C40F]"></i>
+                  <i class="fas fa-star text-[#F1C40F]"></i>
+                  <i class="fas fa-star text-[#F1C40F]"></i>
+                  <i class="fas fa-star text-[#F1C40F]"></i>
+                  <i class="fas fa-star-half-alt text-[#F1C40F]"></i>
+                </div>
+              </div>
+              <blockquote class="text-neutral-600 mb-4">
+                "Managing diabetes became much easier with the structured meal plans and regular monitoring. The nutritionist's expertise made all the difference."
+              </blockquote>
+              <p class="text-[#27AE60]">HbA1c reduced from 8.2 to 6.5</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <button class="bg-[#2C3E50] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#2C3E50]/90 transition-all duration-300">
+          View All Success Stories
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+</element><element id="3d034637-d889-45c3-b6af-c067ec4deb64" data-section-id="3d034637-d889-45c3-b6af-c067ec4deb64">
+
+
+<div id="root">
+  <section id="faq" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 animate__animated animate__fadeIn">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#2C3E50] mb-4">Frequently Asked Questions</h2>
+        <p class="text-neutral-600 max-w-2xl mx-auto">Find answers to common questions about our services</p>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        <div class="space-y-4">
+          <!-- FAQ Item 1 -->
+          <div class="border border-neutral-200 rounded-lg animate__animated animate__fadeInUp">
+            <button class="faq-button w-full flex items-center justify-between p-4 text-left">
+              <span class="text-lg font-semibold text-[#2C3E50]">How do the virtual consultations work?</span>
+              <i class="fas fa-chevron-down text-[#27AE60] transition-transform duration-200"></i>
+            </button>
+            <div class="faq-answer hidden p-4 pt-0 text-neutral-600">
+              Our virtual consultations are conducted through our secure platform. Once you book an appointment, you'll receive a unique meeting link. During the consultation, you can discuss your nutrition goals, receive personalized advice, and get customized meal plans.
+            </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="border border-neutral-200 rounded-lg animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+            <button class="faq-button w-full flex items-center justify-between p-4 text-left">
+              <span class="text-lg font-semibold text-[#2C3E50]">What are the payment options available?</span>
+              <i class="fas fa-chevron-down text-[#27AE60] transition-transform duration-200"></i>
+            </button>
+            <div class="faq-answer hidden p-4 pt-0 text-neutral-600">
+              We accept all major credit cards, debit cards, and digital wallets. Our payment gateway is secure and encrypted to ensure safe transactions. You'll be charged only after booking confirmation.
+            </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="border border-neutral-200 rounded-lg animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+            <button class="faq-button w-full flex items-center justify-between p-4 text-left">
+              <span class="text-lg font-semibold text-[#2C3E50]">How qualified are your nutritionists?</span>
+              <i class="fas fa-chevron-down text-[#27AE60] transition-transform duration-200"></i>
+            </button>
+            <div class="faq-answer hidden p-4 pt-0 text-neutral-600">
+              All our nutritionists are certified professionals with relevant degrees and certifications. They undergo a strict verification process and have years of experience in their specialized fields.
+            </div>
+          </div>
+
+          <!-- FAQ Item 4 -->
+          <div class="border border-neutral-200 rounded-lg animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
+            <button class="faq-button w-full flex items-center justify-between p-4 text-left">
+              <span class="text-lg font-semibold text-[#2C3E50]">Can I reschedule my appointment?</span>
+              <i class="fas fa-chevron-down text-[#27AE60] transition-transform duration-200"></i>
+            </button>
+            <div class="faq-answer hidden p-4 pt-0 text-neutral-600">
+              Yes, you can reschedule your appointment up to 24 hours before the scheduled time. Simply log into your account and use our easy rescheduling system.
+            </div>
+          </div>
+
+          <!-- FAQ Item 5 -->
+          <div class="border border-neutral-200 rounded-lg animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+            <button class="faq-button w-full flex items-center justify-between p-4 text-left">
+              <span class="text-lg font-semibold text-[#2C3E50]">What languages are supported?</span>
+              <i class="fas fa-chevron-down text-[#27AE60] transition-transform duration-200"></i>
+            </button>
+            <div class="faq-answer hidden p-4 pt-0 text-neutral-600">
+              We offer consultations in multiple languages. You can filter nutritionists based on your preferred language during the booking process.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        document.querySelectorAll('.faq-button').forEach(button => {
+          button.addEventListener('click', () => {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            answer.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+            
+            // Close other answers
+            document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
+              if (otherAnswer !== answer) {
+                otherAnswer.classList.add('hidden');
+                otherAnswer.previousElementSibling.querySelector('i').classList.remove('rotate-180');
+              }
+            });
+          });
+        });
+      </script>
+    </div>
+  </section>
+</div>
+</element><element id="bcd8fb3d-782f-44cc-af19-1572aeafe2e2" data-section-id="bcd8fb3d-782f-44cc-af19-1572aeafe2e2">
+
+
+<div id="root">
+  <section id="contact" class="py-20 bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 animate__animated animate__fadeIn">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Get in Touch</h2>
+        <p class="text-neutral-400 max-w-2xl mx-auto">Have questions? We're here to help you on your nutrition journey</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- Contact Form -->
+        <div class="bg-neutral-800 p-8 rounded-xl animate__animated animate__fadeInLeft">
+          <form id="contactForm" class="space-y-6">
+            <div>
+              <label class="block text-white mb-2" for="name">Full Name</label>
+              <input type="text" id="name" class="w-full px-4 py-3 rounded-lg bg-neutral-700 border border-neutral-600 text-white focus:outline-none focus:border-[#27AE60]" required>
+            </div>
+            
+            <div>
+              <label class="block text-white mb-2" for="email">Email Address</label>
+              <input type="email" id="email" class="w-full px-4 py-3 rounded-lg bg-neutral-700 border border-neutral-600 text-white focus:outline-none focus:border-[#27AE60]" required>
+            </div>
+            
+            <div>
+              <label class="block text-white mb-2" for="subject">Subject</label>
+              <select id="subject" class="w-full px-4 py-3 rounded-lg bg-neutral-700 border border-neutral-600 text-white focus:outline-none focus:border-[#27AE60]">
+                <option>General Inquiry</option>
+                <option>Technical Support</option>
+                <option>Billing Question</option>
+                <option>Partnership Opportunity</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-white mb-2" for="message">Message</label>
+              <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg bg-neutral-700 border border-neutral-600 text-white focus:outline-none focus:border-[#27AE60]" required></textarea>
+            </div>
+            
+            <button type="submit" class="w-full bg-[#F1C40F] text-neutral-900 py-4 rounded-lg font-semibold hover:bg-[#F1C40F]/90 transition-all duration-300">
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="animate__animated animate__fadeInRight">
+          <div class="bg-neutral-800 p-8 rounded-xl mb-8">
+            <h3 class="text-xl font-semibold text-white mb-6">Contact Information</h3>
+            <div class="space-y-4">
+              <div class="flex items-center gap-4 text-neutral-300">
+                <div class="w-12 h-12 bg-[#27AE60]/10 rounded-lg flex items-center justify-center text-[#27AE60]">
+                  <i class="fas fa-envelope text-xl"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-neutral-400">Email</p>
+                  <p class="text-white">support@nutrinix.com</p>
+                </div>
+              </div>
+              
+              <div class="flex items-center gap-4 text-neutral-300">
+                <div class="w-12 h-12 bg-[#27AE60]/10 rounded-lg flex items-center justify-center text-[#27AE60]">
+                  <i class="fas fa-phone text-xl"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-neutral-400">Phone</p>
+                  <p class="text-white">+1 (888) 123-4567</p>
+                </div>
+              </div>
+              
+              <div class="flex items-center gap-4 text-neutral-300">
+                <div class="w-12 h-12 bg-[#27AE60]/10 rounded-lg flex items-center justify-center text-[#27AE60]">
+                  <i class="fas fa-clock text-xl"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-neutral-400">Working Hours</p>
+                  <p class="text-white">Mon - Fri: 9:00 AM - 8:00 PM</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-neutral-800 p-8 rounded-xl">
+            <h3 class="text-xl font-semibold text-white mb-6">Follow Us</h3>
+            <div class="flex gap-4">
+              <a href="#" class="w-12 h-12 bg-[#27AE60]/10 rounded-lg flex items-center justify-center text-[#27AE60] hover:bg-[#27AE60] hover:text-white transition-all duration-300">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="w-12 h-12 bg-[#27AE60]/10 rounded-lg flex items-center justify-center text-[#27AE60] hover:bg-[#27AE60] hover:text-white transition-all duration-300">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="w-12 h-12 bg-[#27AE60]/10 rounded-lg flex items-center justify-center text-[#27AE60] hover:bg-[#27AE60] hover:text-white transition-all duration-300">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="w-12 h-12 bg-[#27AE60]/10 rounded-lg flex items-center justify-center text-[#27AE60] hover:bg-[#27AE60] hover:text-white transition-all duration-300">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</element><element id="2fd6f603-47b1-4b57-b694-c5668c72b59c" data-section-id="2fd6f603-47b1-4b57-b694-c5668c72b59c">
+
+
+<div id="root">
+  <footer id="footer" class="bg-neutral-900 text-white pt-20 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <!-- Company Info -->
+        <div>
+          <h3 class="text-2xl font-bold text-[#27AE60] mb-6">Nutrinix</h3>
+          <p class="text-neutral-400 mb-6">Connecting you with expert nutritionists for personalized dietary consultations, anytime, anywhere.</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-neutral-400 hover:text-[#27AE60]"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-neutral-400 hover:text-[#27AE60]"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-neutral-400 hover:text-[#27AE60]"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-neutral-400 hover:text-[#27AE60]"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+          <ul class="space-y-3">
+            <li><a href="/about" class="text-neutral-400 hover:text-[#27AE60] transition-colors">About Us</a></li>
+            <li><a href="/privacy" class="text-neutral-400 hover:text-[#27AE60] transition-colors">Privacy Policy</a></li>
+            <li><a href="/terms" class="text-neutral-400 hover:text-[#27AE60] transition-colors">Terms of Service</a></li>
+            <li><a href="/contact" class="text-neutral-400 hover:text-[#27AE60] transition-colors">Contact</a></li>
+            <li><a href="/faq" class="text-neutral-400 hover:text-[#27AE60] transition-colors">FAQs</a></li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Our Services</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-neutral-400 hover:text-[#27AE60] transition-colors">Virtual Consultations</a></li>
+            <li><a href="#" class="text-neutral-400 hover:text-[#27AE60] transition-colors">Personalized Meal Plans</a></li>
+            <li><a href="#" class="text-neutral-400 hover:text-[#27AE60] transition-colors">Diet Analysis</a></li>
+            <li><a href="#" class="text-neutral-400 hover:text-[#27AE60] transition-colors">Nutrition Coaching</a></li>
+            <li><a href="#" class="text-neutral-400 hover:text-[#27AE60] transition-colors">Weight Management</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Newsletter</h4>
+          <p class="text-neutral-400 mb-4">Subscribe to our newsletter for nutrition tips and updates.</p>
+          <form class="space-y-4">
+            <input type="email" placeholder="Your email address" class="w-full px-4 py-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:border-[#27AE60]">
+            <button type="submit" class="w-full bg-[#27AE60] text-white py-3 rounded-lg hover:bg-[#27AE60]/90 transition-all duration-300">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 border-t border-neutral-800">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-neutral-400 text-sm mb-4 md:mb-0">&copy; 2024 Nutrinix. All rights reserved.</p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-neutral-400 hover:text-[#27AE60] text-sm">Privacy Policy</a>
+            <a href="#" class="text-neutral-400 hover:text-[#27AE60] text-sm">Terms of Service</a>
+            <a href="#" class="text-neutral-400 hover:text-[#27AE60] text-sm">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+</element>
+            <div id="page_complete">
+            <script>
+                console.log('Page complete');
+            </script>
+            </body>
+            </html>
+          

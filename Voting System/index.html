@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Voting System</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Background Elements -->
+    <div class="gradient-bg">
+      <div class="gradient-orb gradient-orb-1"></div>
+      <div class="gradient-orb gradient-orb-2"></div>
+      <div class="gradient-orb gradient-orb-3"></div>
+      <div class="gradient-mesh"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header__content">
+        <div class="header__logo">
+          <span class="logo-icon">🗳️</span>
+          <h1>Digital Voting</h1>
+        </div>
+        <button id="adminLoginBtn" class="btn btn--sm admin-btn">
+          <span class="admin-icon">👤</span>
+          Admin Login
+        </button>
+      </div>
+      <div class="header-gradient-line"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Landing Page -->
+      <section id="landingPage" class="page-section landing">
+        <div class="landing__background">
+          <div class="landing__gradient-overlay"></div>
+        </div>
+        <div class="landing__content">
+          <div class="hero-badge">
+            <span>🔒</span>
+            <span class="badge-text">Secure & Transparent</span>
+          </div>
+
+          <div class="hero-title">
+            <h1>Welcome to Digital Voting</h1>
+            <div class="title-gradient-underline"></div>
+          </div>
+
+          <p class="hero-subtitle">
+            Cast your vote securely using our advanced OTP-based authentication
+            system with end-to-end encryption.
+          </p>
+
+          <div class="security-features">
+            <div class="security-feature">
+              <div class="security-feature__icon-wrapper">
+                <span class="security-feature__icon">📱</span>
+                <div class="feature-glow"></div>
+              </div>
+              <h3>OTP Authentication</h3>
+              <p>Secure login with SMS verification</p>
+            </div>
+
+            <div class="security-feature">
+              <div class="security-feature__icon-wrapper">
+                <span class="security-feature__icon">✅</span>
+                <div class="feature-glow"></div>
+              </div>
+              <h3>Voter Verification</h3>
+              <p>Identity validation before voting</p>
+            </div>
+
+            <div class="security-feature">
+              <div class="security-feature__icon-wrapper">
+                <span class="security-feature__icon">🛡️</span>
+                <div class="feature-glow"></div>
+              </div>
+              <h3>Secure Voting</h3>
+              <p>Encrypted and tamper-proof ballots</p>
+            </div>
+          </div>
+
+          <button id="startVotingBtn" class="cta-button">
+            <span class="btn-text">Start Voting Process</span>
+            <span class="btn-arrow">→</span>
+          </button>
+
+          <div class="trust-indicators">
+            <div class="trust-item">
+              <span class="trust-icon">🔐</span>
+              <span>End-to-End Encrypted</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon">⚡</span>
+              <span>Real-time Verification</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon">🎯</span>
+              <span>100% Accurate</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Voter Login Page -->
+      <section id="voterLoginPage" class="page-section">
+        <div class="card card--enhanced">
+          <div class="card-gradient-border"></div>
+
+          <div class="page-header">
+            <h2>Voter Authentication</h2>
+            <p>Enter your credentials to receive OTP</p>
+          </div>
+
+          <div class="progress-bar">
+            <span class="progress-step active">Login</span>
+            <span class="progress-step">OTP</span>
+            <span class="progress-step">Vote</span>
+          </div>
+
+          <form id="voterLoginForm" class="auth-form">
+            <div class="form-group">
+              <label for="aadhaarInput" class="form-label">
+                <span class="label-icon">🆔</span>
+                Aadhaar Number
+              </label>
+              <div class="input-wrapper">
+                <input
+                  type="tel"
+                  id="aadhaarInput"
+                  class="form-control"
+                  placeholder="Enter 12-digit Aadhaar number"
+                  maxlength="12"
+                  required
+                />
+                <div class="input-gradient-border"></div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phoneInput" class="form-label">
+                <span class="label-icon">📱</span>
+                Phone Number
+              </label>
+              <div class="input-wrapper">
+                <input
+                  type="tel"
+                  id="phoneInput"
+                  class="form-control"
+                  placeholder="Enter 10-digit phone number"
+                  maxlength="10"
+                  required
+                />
+                <div class="input-gradient-border"></div>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              id="generateOtpBtn"
+              class="btn btn--primary btn--full-width"
+            >
+              <span class="btn-text">Generate OTP</span>
+              <span class="loading-spinner"></span>
+            </button>
+
+            <div id="loginError" class="error-message"></div>
+          </form>
+
+          <button
+            id="backToLandingBtn"
+            class="btn btn--outline back-btn btn--full-width"
+          >
+            ← Back to Home
+          </button>
+        </div>
+      </section>
+
+      <!-- OTP Verification Page -->
+      <section id="otpPage" class="page-section">
+        <div class="card card--enhanced">
+          <div class="card-gradient-border"></div>
+
+          <div class="page-header">
+            <h2>OTP Verification</h2>
+            <p>Enter the 6-digit code sent to your phone</p>
+          </div>
+
+          <div class="progress-bar">
+            <span class="progress-step completed">Login</span>
+            <span class="progress-step active">OTP</span>
+            <span class="progress-step">Vote</span>
+          </div>
+
+          <div class="otp-section">
+            <div class="otp-display-container">
+              <div class="otp-display">
+                <div class="otp-display-header">
+                  <h3>
+                    <span class="label-icon">📱</span>
+                    Your OTP (Simulated SMS)
+                  </h3>
+                </div>
+
+                <div class="otp-code-container">
+                  <div id="displayedOtp" class="otp-code-display">123456</div>
+                  <div class="otp-pulse-bg"></div>
+                </div>
+
+                <div id="otpTimer" class="otp-timer">Valid for: 5:00</div>
+              </div>
+            </div>
+
+            <form id="otpVerificationForm" class="auth-form">
+              <div class="form-group">
+                <label for="otpInput" class="form-label">
+                  <span class="label-icon">🔢</span>
+                  Enter OTP
+                </label>
+                <div class="input-wrapper">
+                  <input
+                    type="text"
+                    id="otpInput"
+                    class="form-control otp-input"
+                    placeholder="Enter 6-digit OTP"
+                    maxlength="6"
+                    required
+                  />
+                  <div class="input-gradient-border"></div>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                id="verifyOtpBtn"
+                class="btn btn--primary btn--full-width"
+              >
+                <span class="btn-text">Verify OTP</span>
+                <span class="loading-spinner"></span>
+              </button>
+
+              <button
+                type="button"
+                id="resendOtpBtn"
+                class="btn btn--secondary btn--full-width"
+              >
+                Resend OTP
+              </button>
+
+              <div id="otpError" class="error-message"></div>
+            </form>
+          </div>
+
+          <button
+            id="backToLoginBtn"
+            class="btn btn--outline back-btn btn--full-width"
+          >
+            ← Back to Login
+          </button>
+        </div>
+      </section>
+
+      <!-- Voter Dashboard -->
+      <section id="voterDashboardPage" class="page-section">
+        <div class="card card--enhanced dashboard-container">
+          <div class="card-gradient-border"></div>
+
+          <div class="page-header">
+            <h2>Voter Dashboard</h2>
+            <p>Verify your information and proceed to vote</p>
+          </div>
+
+          <div class="progress-bar">
+            <span class="progress-step completed">Login</span>
+            <span class="progress-step completed">OTP</span>
+            <span class="progress-step active">Vote</span>
+          </div>
+
+          <div class="voter-info">
+            <div class="voter-info-header">
+              <h3>
+                <span class="info-icon">👤</span>
+                Voter Information
+              </h3>
+            </div>
+            <div class="voter-details">
+              <div class="voter-detail">
+                <span class="detail-label">Name:</span>
+                <span id="voterName" class="detail-value">-</span>
+              </div>
+              <div class="voter-detail">
+                <span class="detail-label">Phone:</span>
+                <span id="voterPhone" class="detail-value">-</span>
+              </div>
+              <div class="voter-detail">
+                <span class="detail-label">Aadhaar:</span>
+                <span id="voterAadhaar" class="detail-value">-</span>
+              </div>
+            </div>
+          </div>
+
+          <button
+            id="proceedToVoteBtn"
+            class="btn btn--primary btn--full-width"
+          >
+            Proceed to Vote
+          </button>
+
+          <button
+            id="logoutBtn"
+            class="btn btn--outline back-btn btn--full-width"
+          >
+            Logout
+          </button>
+        </div>
+      </section>
+
+      <!-- Voting Page -->
+      <section id="votingPage" class="page-section">
+        <div class="card voting-container">
+          <div class="page-header">
+            <h2>Cast Your Vote</h2>
+            <p>Select your preferred candidate</p>
+          </div>
+
+          <div id="votingForm" class="candidates-list">
+            <!-- Candidates will be dynamically loaded here -->
+          </div>
+
+          <button
+            id="castVoteBtn"
+            class="btn btn--primary btn--full-width"
+            disabled
+          >
+            Cast Vote
+          </button>
+
+          <div id="votingError" class="error-message"></div>
+
+          <button
+            id="backToDashboardBtn"
+            class="btn btn--outline back-btn btn--full-width"
+          >
+            ← Back to Dashboard
+          </button>
+        </div>
+      </section>
+
+      <!-- Confirmation Page -->
+      <section id="confirmationPage" class="page-section">
+        <div class="card confirmation-container">
+          <div class="confirmation-content">
+            <div class="success-animation">
+              <span class="success-icon">🎉</span>
+              <div class="success-ripple"></div>
+            </div>
+
+            <h2>Vote Cast Successfully!</h2>
+            <p>Your vote has been recorded securely</p>
+
+            <div class="vote-receipt">
+              <div class="receipt-header">
+                <h3>
+                  <span class="receipt-icon">📄</span>
+                  Voting Receipt
+                </h3>
+              </div>
+              <div class="receipt-details">
+                <div class="receipt-item">
+                  <span class="receipt-label">Candidate:</span>
+                  <span id="receiptCandidate" class="receipt-value">-</span>
+                </div>
+                <div class="receipt-item">
+                  <span class="receipt-label">Party:</span>
+                  <span id="receiptParty" class="receipt-value">-</span>
+                </div>
+                <div class="receipt-item">
+                  <span class="receipt-label">Timestamp:</span>
+                  <span id="receiptTimestamp" class="receipt-value">-</span>
+                </div>
+                <div class="receipt-item">
+                  <span class="receipt-label">Vote Hash:</span>
+                  <span id="receiptHash" class="receipt-value hash-code"
+                    >-</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <button
+              id="finishVotingBtn"
+              class="btn btn--primary btn--full-width"
+            >
+              Finish Voting
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-gradient-border"></div>
+        <div class="modal-header">
+          <h3>Admin Login</h3>
+          <button id="closeAdminModal" class="modal-close">&times;</button>
+        </div>
+        <form id="adminLoginForm">
+          <div class="form-group">
+            <label for="adminUsername" class="form-label">Username</label>
+            <input
+              type="text"
+              id="adminUsername"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="adminPassword" class="form-label">Password</label>
+            <input
+              type="password"
+              id="adminPassword"
+              class="form-control"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn--primary btn--full-width">
+            Login
+          </button>
+          <div id="adminError" class="error-message"></div>
+        </form>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

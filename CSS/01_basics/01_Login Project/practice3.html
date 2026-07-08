@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Jungle Gym</title>
+    <style>
+      body {
+        background-color: rgb(248, 189, 116);
+        padding: 0;
+        margin: 0;
+        height: 100vh;
+        
+      }
+      .nav-container{
+        margin-bottom: 20px;
+      }
+      h2{
+        margin bottom: 20px;
+
+      }
+      .nav1{
+        background-color: rgb(203, 242, 134);
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+      }
+      .nav1 ul{
+        display: flex;
+        justify-content: space-between;
+
+      }
+      .nav1 li {
+          display: inline;  
+      }
+      .nav1 a{
+            text-decoration: none;
+            color: rgb(95, 22, 243);
+            padding: 5px 10px;
+            position: relative;
+            cursor: crosshair;
+            position: relative;
+        }
+        .nav1 a::after{
+            content: "C";
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+            background-color: blueviolet;
+            transform: scaleX(0);
+            transition: transform 0.3s ease-in-out;
+        }
+        .nav1 a:hover::after{
+            transform: scaleX(1);
+        }
+            
+
+
+      .Card {
+        background-color: #ece590;
+        width: 450px;
+        border-radius: 8px;
+        padding: 30px;
+    
+        
+      }
+      
+      h1 {
+        margin-bottom: 20px;
+        text-align: center;
+        color: rgb(91, 232, 232);
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+
+        gap: 8px;
+      }
+      input {
+        padding: 10px;
+        border-radius: 8px;
+      }
+      button {
+        border-radius: 8px;
+        padding: 20px;
+        background-color: rgb(181, 155, 120);
+      }
+      button:hover {
+        background-color: rgb(116, 225, 229);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav-container">
+        <h2>Explore More!!</h2>
+        <nav class="nav1"
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Products</a></li>
+        
+        </ul>
+        </div>
+    </nav>
+    <div class="Card">
+      <h1>Welcome to Jungle Gym</h1>
+      <form>
+        <input type="Name" placeholder="Your Name" />
+        <input type="email" name="Email" id="" placeholder="Email" />
+        <label for="Age">Age</label>
+        <input type="date" name="" id="" />
+        <button type="submit">Submit</button>
+
+    
+      </form>
+    </div>
+  </body>
+</html>
+
+
+
+

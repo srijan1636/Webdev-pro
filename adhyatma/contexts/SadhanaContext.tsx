@@ -1,84 +1,174 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import { SadhanaData, DEFAULT_SADHANA_DATA } from "../types/sadhana";
-
-const STORAGE_KEY = "adhyatma_sadhana";
 
 interface SadhanaContextType {
   data: SadhanaData;
-  logSession: (sessionJapa: number, sessionMeditation: number) => void;
+  logSession: (sessionJapa: number, sessionMeditation: number) => Promise<void>;
+  loading: boolean;
 }
 
 const SadhanaContext = createContext<SadhanaContextType | undefined>(undefined);
 
+// Given a history object like { "Mon Sep 14 2026": { japa: 10, meditation: 5 } },
+// count how many consecutive days (ending today or yesterday) have real activity.
+function calculateStreak(history: SadhanaData["history"]): number {
+  const isActive = (date: Date) => {
+    const entry = history[date.toDateString()];
+    return !!entry && (entry.japa > 0 || entry.meditation > 0);
+  };
+
+  const cursor = new Date();
+  let streak = 0;
+
+  if (isActive(cursor)) {
+    streak = 1;
+  } else {
+    // Give grace for "haven't practiced yet today" by checking yesterday first
+    cursor.setDate(cursor.getDate() - 1);
+    if (!isActive(cursor)) {
+      return 0; // missed both today and yesterday, streak is broken
+    }
+    streak = 1;
+  }
+
+  // Keep walking backwards day by day while each day is active
+  while (true) {
+    cursor.setDate(cursor.getDate() - 1);
+    if (isActive(cursor)) {
+      streak++;
+    } else {
+      break;
+    }
+  }
+
+  return streak;
+}
+
 export function SadhanaProvider({ children }: { children: React.ReactNode }) {
+  const { data: session } = useSession();
   const [data, setData] = useState<SadhanaData>(DEFAULT_SADHANA_DATA);
+  const [loading, setLoading] = useState(true);
 
-  // Load once on mount, same as before, just now in one place
+  const userId = (session?.user as any)?.id;
+
   useEffect(() => {
-    const savedData = localStorage.getItem(STORAGE_KEY);
-    if (savedData) {
-      try {
-        setData(JSON.parse(savedData));
-      } catch {
-        setData(DEFAULT_SADHANA_DATA);
-      }
-    }
-  }, []);
-
-  // Moved straight out of SadhnaEngine's handleSaveSession
-  const logSession = (sessionJapa: number, sessionMeditation: number) => {
-    const today = new Date();
-    const todayStr = today.toDateString();
-
-    const yesterday = new Date(today);
-    yesterday.setDate(yesterday.getDate() - 1);
-    const yesterdayStr = yesterday.toDateString();
-
-    let newStreak = data.streak;
-
-    if (sessionJapa > 0 || sessionMeditation > 0) {
-      if (data.lastLogDate === yesterdayStr) {
-        newStreak += 1;
-      } else if (data.lastLogDate === todayStr) {
-        newStreak = data.streak;
-      } else {
-        newStreak = 1;
-      }
+    if (!userId) {
+      setData(DEFAULT_SADHANA_DATA);
+      setLoading(false);
+      return;
     }
 
-    const currentHistory = data.history || {};
-    const todayHistory = currentHistory[todayStr] || { japa: 0, meditation: 0 };
+    setLoading(true);
+    fetch(`/api/session?userId=${userId}`)
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.success) {
+          const sessions = result.sessions as {
+            japaRounds: number;
+            meditationMinutes: number;
+            date: string;
+          }[];
 
-    const newHistory = {
-      ...currentHistory,
-      [todayStr]: {
-        japa: todayHistory.japa + sessionJapa,
-        meditation: todayHistory.meditation + sessionMeditation,
-      },
-    };
+          const totalJapa = sessions.reduce((sum, s) => sum + s.japaRounds, 0);
+          const totalMeditation = sessions.reduce(
+            (sum, s) => sum + s.meditationMinutes,
+            0,
+          );
 
-    const newData: SadhanaData = {
-      japaRounds: data.japaRounds + sessionJapa,
-      meditationMinutes: data.meditationMinutes + sessionMeditation,
-      streak: newStreak,
-      lastLogDate: todayStr,
-      history: newHistory,
-    };
+          const history: SadhanaData["history"] = {};
+          sessions.forEach((s) => {
+            const dateStr = new Date(s.date).toDateString();
+            if (!history[dateStr]) {
+              history[dateStr] = { japa: 0, meditation: 0 };
+            }
+            history[dateStr].japa += s.japaRounds;
+            history[dateStr].meditation += s.meditationMinutes;
+          });
 
-    setData(newData);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(newData));
+          const streak = calculateStreak(history);
+
+          setData({
+            japaRounds: totalJapa,
+            meditationMinutes: totalMeditation,
+            streak,
+            lastLogDate:
+              sessions.length > 0
+                ? new Date(sessions[0].date).toDateString()
+                : "",
+            history,
+          });
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching sessions:", err);
+        setLoading(false);
+      });
+  }, [userId]);
+
+  const logSession = async (sessionJapa: number, sessionMeditation: number) => {
+    if (!userId) {
+      console.error("Cannot log session: not signed in");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId,
+          japaRounds: sessionJapa,
+          meditationMinutes: sessionMeditation,
+        }),
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
+        setData((prev) => {
+          const todayStr = new Date().toDateString();
+          const currentHistory = prev.history || {};
+          const todayHistory = currentHistory[todayStr] || {
+            japa: 0,
+            meditation: 0,
+          };
+
+          const newHistory = {
+            ...currentHistory,
+            [todayStr]: {
+              japa: todayHistory.japa + sessionJapa,
+              meditation: todayHistory.meditation + sessionMeditation,
+            },
+          };
+
+          const newStreak = calculateStreak(newHistory);
+
+          return {
+            ...prev,
+            japaRounds: prev.japaRounds + sessionJapa,
+            meditationMinutes: prev.meditationMinutes + sessionMeditation,
+            streak: newStreak,
+            lastLogDate: todayStr,
+            history: newHistory,
+          };
+        });
+      }
+    } catch (error) {
+      console.error("Error saving session:", error);
+    }
   };
 
   return (
-    <SadhanaContext.Provider value={{ data, logSession }}>
+    <SadhanaContext.Provider value={{ data, logSession, loading }}>
       {children}
     </SadhanaContext.Provider>
   );
 }
 
-// This is the hook every component will import from now on
 export function useSadhanaData() {
   const context = useContext(SadhanaContext);
   if (!context) {

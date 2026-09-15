@@ -12,8 +12,6 @@ interface SadhanaContextType {
 
 const SadhanaContext = createContext<SadhanaContextType | undefined>(undefined);
 
-// Given a history object like { "Mon Sep 14 2026": { japa: 10, meditation: 5 } },
-// count how many consecutive days (ending today or yesterday) have real activity.
 function calculateStreak(history: SadhanaData["history"]): number {
   const isActive = (date: Date) => {
     const entry = history[date.toDateString()];
@@ -26,15 +24,13 @@ function calculateStreak(history: SadhanaData["history"]): number {
   if (isActive(cursor)) {
     streak = 1;
   } else {
-    // Give grace for "haven't practiced yet today" by checking yesterday first
     cursor.setDate(cursor.getDate() - 1);
     if (!isActive(cursor)) {
-      return 0; // missed both today and yesterday, streak is broken
+      return 0;
     }
     streak = 1;
   }
 
-  // Keep walking backwards day by day while each day is active
   while (true) {
     cursor.setDate(cursor.getDate() - 1);
     if (isActive(cursor)) {
@@ -48,21 +44,19 @@ function calculateStreak(history: SadhanaData["history"]): number {
 }
 
 export function SadhanaProvider({ children }: { children: React.ReactNode }) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [data, setData] = useState<SadhanaData>(DEFAULT_SADHANA_DATA);
   const [loading, setLoading] = useState(true);
 
-  const userId = (session?.user as any)?.id;
-
   useEffect(() => {
-    if (!userId) {
+    if (status !== "authenticated") {
       setData(DEFAULT_SADHANA_DATA);
       setLoading(false);
       return;
     }
 
     setLoading(true);
-    fetch(`/api/session?userId=${userId}`)
+    fetch("/api/session")
       .then((res) => res.json())
       .then((result) => {
         if (result.success) {
@@ -107,10 +101,10 @@ export function SadhanaProvider({ children }: { children: React.ReactNode }) {
         console.error("Error fetching sessions:", err);
         setLoading(false);
       });
-  }, [userId]);
+  }, [status]);
 
   const logSession = async (sessionJapa: number, sessionMeditation: number) => {
-    if (!userId) {
+    if (status !== "authenticated") {
       console.error("Cannot log session: not signed in");
       return;
     }
@@ -120,7 +114,6 @@ export function SadhanaProvider({ children }: { children: React.ReactNode }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          userId,
           japaRounds: sessionJapa,
           meditationMinutes: sessionMeditation,
         }),

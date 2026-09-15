@@ -1,20 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
 import { connectToDatabase } from "../../../lib/mongodb";
 import SadhanaSession from "../../../models/SadhanaSession";
 
 export async function POST(request: NextRequest) {
   try {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user) {
+      return NextResponse.json(
+        { error: "You must be signed in" },
+        { status: 401 },
+      );
+    }
+
+    const userId = (session.user as any).id;
+
     await connectToDatabase();
 
     const body = await request.json();
-    const { userId, japaRounds, meditationMinutes } = body;
-
-    if (!userId) {
-      return NextResponse.json(
-        { error: "userId is required" },
-        { status: 400 },
-      );
-    }
+    const { japaRounds, meditationMinutes } = body;
 
     const newSession = await SadhanaSession.create({
       userId,
@@ -34,16 +40,18 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    await connectToDatabase();
+    const session = await getServerSession(authOptions);
 
-    const userId = request.nextUrl.searchParams.get("userId");
-
-    if (!userId) {
+    if (!session?.user) {
       return NextResponse.json(
-        { error: "userId is required" },
-        { status: 400 },
+        { error: "You must be signed in" },
+        { status: 401 },
       );
     }
+
+    const userId = (session.user as any).id;
+
+    await connectToDatabase();
 
     const sessions = await SadhanaSession.find({ userId }).sort({ date: -1 });
 

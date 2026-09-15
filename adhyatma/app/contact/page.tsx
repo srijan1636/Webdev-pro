@@ -11,7 +11,8 @@ export default function ContactPage() {
       <div className="text-stone-700 leading-relaxed space-y-4 text-[15px] md:text-base">
         <p>
           Adhyatma is built and maintained by one person. If you have questions,
-          feedback, or just want to say hello, feel free to reach out directly.
+          feedback, or just want to say hello, feel free to reach out to me
+          directly.
         </p>
 
         <div className="bg-[#FAF7F2] border border-stone-200 rounded-2xl p-6 mt-6">

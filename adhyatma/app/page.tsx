@@ -350,7 +350,7 @@ export default function Home() {
           <div className="relative w-full max-w-2xl animate-in fade-in zoom-in duration-300 z-10">
             <button
               onClick={closeModals}
-              className="absolute top-5 right-5 z-50 text-stone-400 hover:text-stone-800 text-xl font-bold bg-stone-100 hover:bg-stone-200 rounded-full w-8 h-8 flex items-center justify-center transition shadow-sm"
+              className="absolute top-2 right-4 z-50 text-stone-400 hover:text-stone-800 text-xl font-bold bg-stone-100 hover:bg-stone-200 rounded-full w-8 h-8 flex items-center justify-center transition shadow-sm"
             >
               ✕
             </button>
@@ -366,7 +366,7 @@ export default function Home() {
           <div className="relative w-full max-w-md animate-in fade-in zoom-in duration-300 z-10">
             <button
               onClick={closeModals}
-              className="absolute top-6 right-6 z-50 text-stone-400 hover:text-stone-800 text-xl font-bold bg-stone-100 hover:bg-stone-200 rounded-full w-8 h-8 flex items-center justify-center transition shadow-sm"
+              className="absolute top-1 right-4 z-50 text-stone-400 hover:text-stone-800 text-xl font-bold bg-stone-100 hover:bg-stone-200 rounded-full w-8 h-8 flex items-center justify-center transition shadow-sm"
             >
               ✕
             </button>

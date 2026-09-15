@@ -34,6 +34,30 @@ export default function RootLayout({
           <SadhanaProvider>
             <Navbar />
             {children}
+            <footer className="border-t border-stone-200 py-8">
+              <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p className="text-sm text-stone-500">
+                  © 2026 Adhyatma. Built with intention.
+                </p>
+                <div className="flex gap-6 text-sm text-stone-500">
+                  <a href="/about" className="hover:text-amber-800 transition">
+                    About
+                  </a>
+                  <a
+                    href="/contact"
+                    className="hover:text-amber-800 transition"
+                  >
+                    Contact
+                  </a>
+                  <a
+                    href="/privacy"
+                    className="hover:text-amber-800 transition"
+                  >
+                    Privacy
+                  </a>
+                </div>
+              </div>
+            </footer>
           </SadhanaProvider>
         </AuthProvider>
       </body>

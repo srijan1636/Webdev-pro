@@ -30,7 +30,7 @@ export default function PrivacyPage() {
         <p>
           This information exists only so you can log in and have your practice
           history saved and available whenever you return. We do not sell data,
-          run ads, or share information with advertisers.
+          or share information with advertisers.
         </p>
 
         <h2 className="text-lg font-bold text-stone-900 pt-2">

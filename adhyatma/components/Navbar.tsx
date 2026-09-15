@@ -28,7 +28,7 @@ export default function Navbar() {
 
             {session ? (
               <button
-                onClick={() => signOut({ callbackUrl: "/" })}
+                onClick={() => signOut({ callbackUrl: window.location.origin })}
                 className="px-7 py-2.5 rounded-full bg-stone-900 text-stone-50 text-sm font-medium tracking-wide shadow-sm hover:bg-stone-800 hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 Sign Out
